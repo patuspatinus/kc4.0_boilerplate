@@ -1,0 +1,5 @@
+deploy/data/dev
+deploy/dev/env
+deploy/dev/.env
+deploy/dev/node_modules
+__pycache__

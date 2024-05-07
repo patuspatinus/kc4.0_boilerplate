@@ -1,0 +1,16 @@
+{
+    "name": "miniflux-connector",  
+    "config": {
+        "connector.class": "io.debezium.connector.postgresql.PostgresConnector", 
+        "plugin.name": "pgoutput",
+        "database.hostname": "miniflux-db", 
+        "database.port": "5432", 
+        "database.user": "miniflux", 
+        "database.password": "secret", 
+        "database.dbname" : "miniflux", 
+        "database.server.name": "miniflux-db", 
+        "database.include.list": "miniflux",
+        "table.include.list": "miniflux.entries",
+        "topic.prefix": "miniflux-db"
+    }
+}

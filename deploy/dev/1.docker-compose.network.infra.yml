@@ -1,0 +1,6 @@
+version: "3.7"
+
+networks:
+  kcutp_network:
+    name: kcutp_network
+    driver: bridge

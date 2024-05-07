@@ -1,0 +1,56 @@
+version: "3.7"
+
+x-minio-common: &minio-common
+  image: quay.io/minio/minio:RELEASE.2022-11-17T23-20-09Z
+  command: server --console-address ":9001" http://minio{1...2}/data{1...2}
+  expose:
+    - ${MINIO_DEFAULT_PORT_1}
+    - ${MINIO_DEFAULT_PORT_2}
+  environment:
+    MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+    MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+    interval: 30s
+    timeout: 20s
+    retries: 3
+  env_file: 
+    - ./env/.env.minio
+
+services:
+
+  # Quản lý file
+  minio1:
+    <<: *minio-common
+    # container_name: minio1
+    # hostname: minio1
+    volumes:
+      - ../data/dev/minio/service1/1:/data1
+      - ../data/dev/minio/service1/2:/data2
+    networks:
+      - kcutp_network
+
+  minio2:
+    <<: *minio-common
+    # container_name: minio2
+    # hostname: minio2
+    volumes:
+      - ../data/dev/minio/service2/1:/data1
+      - ../data/dev/minio/service2/2:/data2
+    networks:
+      - kcutp_network
+
+  nginx:
+    image: nginx:1.19.2-alpine
+    # container_name: minio-nginx
+    # hostname: minio-nginx
+    volumes:
+      - ./conf/minio/minio-nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "${MINIO_NGINX_PUBLIC_PORT_1}:${MINIO_NGINX_INTERNAL_PORT_1}"
+      - "${MINIO_NGINX_PUBLIC_PORT_2}:${MINIO_NGINX_INTERNAL_PORT_2}"
+    depends_on:
+      - minio1
+      - minio2
+    networks:
+      - kcutp_network
