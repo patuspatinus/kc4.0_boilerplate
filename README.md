@@ -20,6 +20,9 @@ sudo python docker-down-all.py
 - Check event, kéo url ảnh từ datalake minio
 - Xử lý ảnh
 - Gửi lại ảnh về minio, bắn trả lại event tới kafka
+```bash
+python test_example.py
+```
 
 # Minio
 - fput: Đẩy ảnh lên minio
