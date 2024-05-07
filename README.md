@@ -16,10 +16,10 @@ sudo python docker-down-all.py
 # Vào localhost:9011 để xem file với tk minioadmin/minioadmin
 
 # Workflow
-Giả lập 1 event dummy gửi tới kafka (event chứa đường dẫn url của ảnh )
-Check event, kéo url ảnh từ datalake minio
-Xử lý ảnh
-Gửi lại ảnh về minio, bắn trả lại event tới kafka
+- Giả lập 1 event dummy gửi tới kafka (event chứa đường dẫn url của ảnh )
+- Check event, kéo url ảnh từ datalake minio
+- Xử lý ảnh
+- Gửi lại ảnh về minio, bắn trả lại event tới kafka
 
 # Minio
 - fput: Đẩy ảnh lên minio
