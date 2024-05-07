@@ -17,3 +17,18 @@ sudo python docker-down-all.py
 
 # Workflow
 Giả lập 1 event dummy gửi tới kafka (event chứa đường dẫn url của ảnh )
+Check event, kéo url ảnh từ datalake minio
+Xử lý ảnh
+Gửi lại ảnh về minio, bắn trả lại event tới kafka
+
+# Minio
+- fput: Đẩy ảnh lên minio
+- fget: Kéo ảnh từ minio về
+
+# Kafka
+- Producer: Tạo gửi event
+- Consumer: Nhận event
+
+# Giả lập event 
+- Tạo 1 bucket chứa ảnh ví dụ trên datalake để kéo về
+- Tạo 1 bucket chứa ảnh output của mô hình để đẩy lên
